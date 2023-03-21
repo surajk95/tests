@@ -1,4 +1,7 @@
-const xLimit = 500, yLimit = 500, animationSpeed = 50, jumpFactor = 10
+let xLimit = window.innerWidth-0, yLimit = 100, animationSpeed = 50, jumpFactor = 10
+const head = [[0, yLimit/2], [10, yLimit/2]], tail = [[xLimit-10, yLimit/2], [xLimit, yLimit/2]]
+let beats = [...head, ...tail]
+let target = null
 
 window.onload = () => {
     console.log('init...')
@@ -6,7 +9,9 @@ window.onload = () => {
 };
 
 function init() {
-    pulse()
+    target = document.querySelector('#pulse')
+    //xLimit = window.innerWidth-300
+    pulse2()
 }
 
 function pulse() {
@@ -16,6 +21,60 @@ function pulse() {
 </svg>`
     //draw_web(0)
     draw_heartbeat(0)
+}
+
+function pulse2() {
+    //render()
+    const numValues = Math.floor(xLimit/10)-3
+    insert_rand(numValues)
+    render()
+    next_iter()
+    setInterval(animate_pulse, animationSpeed)
+    // target.innerHTML = get_path()
+}
+
+function render() {
+    target.innerHTML = get_path()
+}
+
+function animate_pulse() {
+    render()
+    next_iter()
+    // setTimeout(animate_pulse, 1000)
+    // setTimeout(animate_pulse(), 1000)
+}
+
+function get_path() {
+    let path = `<svg id="svg" height="${yLimit}" width="${xLimit}">
+    <path d="M ${beats[0][0]} ${beats[0][1]}`
+    for(let i=1; i<beats.length; i++) {
+        path += ` L ${beats[i][0]} ${beats[i][1]}`
+    }
+    path += `"</svg>`
+    return path
+}
+
+function insert_rand(val) {
+    beats.pop()
+    beats.pop()
+    for(let i=0; i<=val; i++) {
+        const prev = beats[beats.length-1]
+        beats.push([prev[0]+10, gen(yLimit)])
+    }
+    beats[beats.length-1][1] = yLimit/2
+    beats.push(...tail)
+    // console.log(`rand`, beats)
+}
+
+function next_iter() {
+    let body = [...beats].slice(3, beats.length-2)
+    // console.log(body)
+    for(let i of body) {
+        i[0] -= 10
+    }
+    body.push([body[body.length-1][0]+10, gen(yLimit)])
+    beats = [...head, ...body, ...tail]
+    // console.log(`iter`, beats)
 }
 
 function draw_heartbeat(x, count=0) {

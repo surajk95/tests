@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=La+Belle+Aurore');
 
 body {
-    background: black;
+    background: radial-gradient(rgb(255, 48, 234), rgb(45, 45, 255));
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(45deg, rgb(14 16 40), rgb(31 64 76));
+    /* background: linear-gradient(45deg, rgb(14 16 40), rgb(31 64 76)); */
 }
 svg {
-  stroke: white;
+  stroke: rgb(255, 37, 204);
   fill: none;
   stroke-width: 2px;
   transform: translateX(0);
