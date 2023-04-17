@@ -1,5 +1,5 @@
-let xLimit = window.innerWidth-0, yLimit = 100, animationSpeed = 50, jumpFactor = 10
-const head = [[0, yLimit/2], [10, yLimit/2]], tail = [[xLimit-10, yLimit/2], [xLimit, yLimit/2]]
+let xLimit = window.innerWidth-0, yLimit = 400, animationSpeed = 500, jumpFactor = 50
+const head = [[0, yLimit], [jumpFactor, yLimit]], tail = [[xLimit-jumpFactor, yLimit], [xLimit, yLimit]]
 let beats = [...head, ...tail]
 let target = null
 
@@ -25,7 +25,7 @@ function pulse() {
 
 function pulse2() {
     //render()
-    const numValues = Math.floor(xLimit/10)-3
+    const numValues = Math.floor(xLimit/jumpFactor)-3
     insert_rand(numValues)
     render()
     next_iter()
@@ -59,9 +59,9 @@ function insert_rand(val) {
     beats.pop()
     for(let i=0; i<=val; i++) {
         const prev = beats[beats.length-1]
-        beats.push([prev[0]+10, gen(yLimit)])
+        beats.push([prev[0]+jumpFactor, gen(yLimit)])
     }
-    beats[beats.length-1][1] = yLimit/2
+    beats[beats.length-1][1] = yLimit
     beats.push(...tail)
     // console.log(`rand`, beats)
 }
@@ -70,9 +70,9 @@ function next_iter() {
     let body = [...beats].slice(3, beats.length-2)
     // console.log(body)
     for(let i of body) {
-        i[0] -= 10
+        i[0] -= jumpFactor
     }
-    body.push([body[body.length-1][0]+10, gen(yLimit)])
+    body.push([body[body.length-1][0]+jumpFactor, gen(yLimit)])
     beats = [...head, ...body, ...tail]
     // console.log(`iter`, beats)
 }
@@ -111,7 +111,7 @@ function draw_web(x, count=0) {
     target.innerHTML = pathString
     if(count<500) {
         count++
-        setTimeout(() =>draw_web(x+10, count), animationSpeed)
+        setTimeout(() =>draw_web(x+jumpFactor, count), animationSpeed)
     }
 }
 

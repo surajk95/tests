@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=La+Belle+Aurore');
 
 body {
-    background: radial-gradient(rgb(255, 48, 234), rgb(45, 45, 255));
+
+    /* background: radial-gradient(rgb(255, 48, 234), rgb(45, 45, 255)); */
+    background: radial-gradient(rgb(35, 36, 35), rgb(4, 4, 4));
     color: white;
     display: flex;
     justify-content: center;
@@ -9,9 +11,14 @@ body {
     /* background: linear-gradient(45deg, rgb(14 16 40), rgb(31 64 76)); */
 }
 svg {
-  stroke: rgb(255, 37, 204);
+  /* stroke: rgb(255, 37, 204);
+  fill: rgba(255, 37, 204, 0.2); */
+  /* stroke: rgb(255, 0, 0);
+  fill: rgba(255, 0, 0, 0.2); */
+  stroke: rgb(22, 255, 5);
+  /* fill: rgba(166, 255, 0, 0.1); */
   fill: none;
-  stroke-width: 2px;
+  stroke-width: 4px;
   transform: translateX(0);
   overflow: visible;
 }
